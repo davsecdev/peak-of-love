@@ -10,19 +10,22 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #1a1a1a;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #fff;
+            background-color: #f5f5f5;
+            font-family: 'Arial', sans-serif;
+            color: #333;
             margin: 0;
+            padding: 0 10px;
         }
 
         .container {
             text-align: center;
             max-width: 600px;
+            width: 100%;
             padding: 20px;
-            background-color: #2a2a2a;
+            background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
 
         audio {
@@ -32,19 +35,34 @@
 
         #lyrics {
             font-size: 1.2em;
-            line-height: 1.5;
+            line-height: 1.6;
             transition: opacity 0.4s;
+            min-height: 50px;
         }
 
-        .fade {
-            opacity: 0.3;
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <audio id="audio" controls>
-            <source src="https://f.top4top.io/m_3117862qc0.mp3" type="audio/mpeg">
+        <button id="playPauseBtn" class="btn">Play</button>
+        <audio id="audio">
+            <source src="path/to/your/audio/file.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <div id="lyrics">
@@ -89,14 +107,36 @@
 
         const audio = document.getElementById('audio');
         const lyricsDiv = document.getElementById('lyrics');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        let intervalId;
 
-        audio.addEventListener('timeupdate', () => {
-            const currentTime = audio.currentTime;
-            const currentLyric = lyrics.find(lyric => currentTime >= lyric.time && currentTime < lyric.time + 5);
-            if (currentLyric) {
-                lyricsDiv.textContent = currentLyric.text;
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = 'Pause';
+                intervalId = setInterval(updateLyrics, 500);
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = 'Play';
+                clearInterval(intervalId);
             }
+        });
+
+        function updateLyrics() {
+            const currentTime = audio.currentTime;
+            let currentLyric = "";
+            for (let i = 0; i < lyrics.length; i++) {
+                if (currentTime >= lyrics[i].time) {
+                    currentLyric = lyrics[i].text;
+                }
+            }
+            lyricsDiv.textContent = currentLyric;
+        }
+
+        audio.addEventListener('ended', () => {
+            playPauseBtn.textContent = 'Play';
+            clearInterval(intervalId);
         });
     </script>
 </body>
-          </html>
+</html>

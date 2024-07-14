@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak of Love Lyrics</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        audio {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #lyrics {
+            font-size: 1.2em;
+            line-height: 1.5;
+            transition: opacity 0.4s;
+        }
+
+        .fade {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <audio id="audio" controls>
+            <source src="https://f.top4top.io/m_3117862qc0.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <div id="lyrics">
+            <!-- Lirik akan ditempatkan di sini -->
+        </div>
+    </div>
+    <script>
+        const lyrics = [
+            { time: 0, text: "I can't define" },
+            { time: 5, text: "When I look into your eyes" },
+            { time: 10, text: "It maybe weird but it feeling like" },
+            { time: 15, text: "The time goes slow" },
+            { time: 20, text: "I can't define" },
+            { time: 25, text: "When I feel into your skin" },
+            { time: 30, text: "It maybe strange but I promise that" },
+            { time: 35, text: "It's the sweetest thing" },
+            { time: 40, text: "Maybe we can't talk" },
+            { time: 45, text: "But baby, we don't need it all" },
+            { time: 50, text: "Cuz maybe, we just find ourselves" },
+            { time: 55, text: "In the peak of love" },
+            { time: 60, text: "No need a vow" },
+            { time: 65, text: "I can keep myself within" },
+            { time: 70, text: "Your deepest love, your comfort zone, even your bad day" },
+            { time: 75, text: "Maybe we can't talk" },
+            { time: 80, text: "But baby, we don't need it all" },
+            { time: 85, text: "Cuz maybe, we just find ourselves" },
+            { time: 90, text: "In the peak of love" },
+            { time: 95, text: "You're my peak of love" },
+            { time: 100, text: "But I can't define" },
+            { time: 105, text: "When I look into your eyes" },
+            { time: 110, text: "It maybe weird but it feeling like" },
+            { time: 115, text: "The time goes slow" },
+            { time: 120, text: "Maybe we can't talk" },
+            { time: 125, text: "But baby, we don't need it all" },
+            { time: 130, text: "Cuz maybe, we just find ourselves" },
+            { time: 135, text: "In the peak of love" },
+            { time: 140, text: "If I'm going wrong" },
+            { time: 145, text: "Don't worry, it won't be so long" },
+            { time: 150, text: "Cuz baby, I will find our home" },
+            { time: 155, text: "In the peak of love" },
+        ];
+
+        const audio = document.getElementById('audio');
+        const lyricsDiv = document.getElementById('lyrics');
+
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            const currentLyric = lyrics.find(lyric => currentTime >= lyric.time && currentTime < lyric.time + 5);
+            if (currentLyric) {
+                lyricsDiv.textContent = currentLyric.text;
+            }
+        });
+    </script>
+</body>
+          </html>
